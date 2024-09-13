@@ -1,0 +1,13 @@
+package com.escuela.dabri.service;
+
+import com.escuela.dabri.model.Aula;
+
+import java.util.List;
+
+public interface IAulaServicio {
+
+    List<Aula> listarAulas();
+    Aula crearAula(Aula aula);
+    Aula actualizarAula(Integer idAula, Aula aula);
+    void eliminarAula(Integer idAula);
+}
