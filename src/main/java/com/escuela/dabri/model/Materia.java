@@ -14,10 +14,11 @@ public class Materia implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idMateria;
     private String nombre;
-    @OneToOne(targetEntity = Docente.class)
+    @ManyToOne(targetEntity = Docente.class)
     @JoinColumn(name="idDocente")
     private Docente docenteAsignado;
 
     @ManyToOne(targetEntity = Curso.class)
+    @JoinColumn(name="idCurso")
     private Curso curso;
 }

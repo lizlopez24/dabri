@@ -25,14 +25,8 @@ public class AulaServicioImpl implements IAulaServicio {
     }
 
     @Override
-    public Aula actualizarAula(Integer id, Aula aula){
-        Aula aulaBd= aulaRepositorio.findById(id).orElse(null);
-        if(aulaBd!=null){
-            aulaBd.setNumero(aula.getNumero());
-            aulaBd.setCapacidad(aula.getCapacidad());
-            return aulaRepositorio.save(aulaBd);
-        }
-        return null;
+    public Aula buscarAula(Integer id){
+        return aulaRepositorio.findById(id).orElse(null);
     }
 
     @Override

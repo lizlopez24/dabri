@@ -1,8 +1,9 @@
 package com.escuela.dabri.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,4 +21,17 @@ public class Matricula implements Serializable {
     private int idMatricula;
     private Date fecha;
 
+    @ManyToOne(targetEntity = Estudiante.class)
+    @JoinColumn(name="idEstudiante")
+    private Estudiante estudiante;
+
+    @ManyToOne (targetEntity = Curso.class)
+    @JsonBackReference
+    @JoinColumn(name="idCurso")
+    private Curso curso;
+
+    @PrePersist
+    protected void onCreate() {
+        this.fecha = new Date();
+    }
 }

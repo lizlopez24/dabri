@@ -8,6 +8,6 @@ public interface IAulaServicio {
 
     List<Aula> listarAulas();
     Aula crearAula(Aula aula);
-    Aula actualizarAula(Integer idAula, Aula aula);
+    Aula buscarAula(Integer id);
     void eliminarAula(Integer idAula);
 }

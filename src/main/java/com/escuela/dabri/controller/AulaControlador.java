@@ -2,6 +2,7 @@ package com.escuela.dabri.controller;
 
 import com.escuela.dabri.model.Aula;
 import com.escuela.dabri.repository.IAulaRepositorio;
+import com.escuela.dabri.service.IAulaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,37 +16,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/aulas")
 public class AulaControlador {
 
     @Autowired
-    private IAulaRepositorio aulaRepositorio;
+    private IAulaServicio aulaServicio;
 
-    @GetMapping("")
+    @GetMapping("/aulas")
     public String listarAulas(Model model){
-        model.addAttribute("aulas",aulaRepositorio.findAll());
+        model.addAttribute("aulas",aulaServicio.listarAulas());
         return "aulas";
     }
-    @GetMapping("/crear")
+    @GetMapping("/crear-aula")
     public String crearAula(){
         return "crearAula";
     }
-    @PostMapping("/guardar")
+
+    @PostMapping("/guardar-aula")
     public String save(Aula aula){
-        aulaRepositorio.save(aula);
+        aulaServicio.crearAula(aula);
         return "redirect:/aulas";
     }
 
-    @GetMapping("/editar/{id}")
-    public String editar(@PathVariable Integer id, Model model){
-        Aula aula= aulaRepositorio.findById(id).orElse(null);
+    @GetMapping("/editar-aula/{id}")
+    public String editar(@PathVariable(value="id") int id, Model model){
+        Aula aula= aulaServicio.buscarAula(id);
         model.addAttribute("a",aula);
         return "editarAula";
     }
-
-    @GetMapping("/eliminar/{id}")
+    @PostMapping("/actualizar-aula")
+    public String actualizar(Aula aula){
+        aulaServicio.crearAula(aula);
+        return "redirect:/aulas";
+    }
+    @GetMapping("/eliminar-aula/{id}")
     public String eliminar(@PathVariable Integer id){
-        aulaRepositorio.deleteById(id);
+        aulaServicio.eliminarAula(id);
         return "redirect:/aulas";
     }
 

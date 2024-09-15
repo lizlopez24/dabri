@@ -8,6 +8,6 @@ public interface IMatriculaServicio {
 
     List<Matricula> listarMatriculas();
     Matricula crearMatricula(Matricula matricula);
-    Matricula actulizarMatricula(Integer idMatricula, Matricula matricula);
+    Matricula buscarMatricula(Integer idMatricula);
     void eliminarMatricula(Integer idMatricula);
 }
